@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900">
+    <title>Countdown Widget</title>
+    <style>
+        body {
+            background-color: transparent; /* Transparent for Notion */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #timer {
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 1em;
+            letter-spacing: 2px;
+        }
+
+        .days, .hours, .minutes, .seconds {
+            display: inline-block;
+            padding: 15px;
+            width: 80px;
+            border-radius: 5px;
+        }
+
+        .days { background: #EF2F3C; color: white; }
+        .hours { background: #eeeeee; color: #183059; }
+        .minutes { background: #276FBF; color: white; }
+        .seconds { background: #F0A202; color: white; }
+
+        .numbers {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">
+        <div class="days"><div id="days" class="numbers"></div>days</div>
+        <div class="hours"><div id="hours" class="numbers"></div>hours</div>
+        <div class="minutes"><div id="minutes" class="numbers"></div>minutes</div>
+        <div class="seconds"><div id="seconds" class="numbers"></div>seconds</div>
+    </div>
+    <script>
+        const myDate = new Date('Feb 18, 2026 00:00:00');
+
+        function updateCountdown() {
+            const today = new Date().getTime();
+            const diff = myDate - today;
+
+            let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run once immediately
+    </script>
+</body>
+</html>
